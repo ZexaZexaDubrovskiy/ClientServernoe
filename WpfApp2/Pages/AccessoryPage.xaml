@@ -1,0 +1,133 @@
+﻿<Page x:Class="WpfApp2.Pages.AccessoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp2.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccessoryPage" Loaded="Page_Loaded_1">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition x:Name="AccessoryColumnChange" Width="400" MaxWidth="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Аксекссуары" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="26" FontWeight="ExtraBold"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Button x:Name="AccessoryAdd" Content="Добавить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryAdd_Click"/>
+            <Button x:Name="AccessoryCopy" Content="Копировать" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryCopy_Click"/>
+            <Button x:Name="AccessoryEdit" Content="Изменить"  Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryEdit_Click"/>
+            <Button x:Name="AccessoryDellete" Content="Удалить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryDelete_Click"/>
+            <Label Content="|" FontSize="24" FontWeight="Bold" Foreground="Gray" Margin="15,0,0,0"/>
+            
+            
+            <ComboBox x:Name="AccessoryFilterComboBox" Width="150" Height="30" Margin="15,0,0,0"/>
+            <TextBox x:Name="AccessoryToBoaFilterTextBox" Margin="5,0,5,0" Width="170" Height="30" TextChanged="AccessoryToBoaFilterTextBox_TextChanged"/>
+        </StackPanel>
+
+
+
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+
+            <DataGrid x:Name="AccessoryGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+
+                <DataGrid.Columns>
+                    <!--1-ый способ-->
+                    <DataGridTextColumn Header="AccName" Binding="{Binding Path=AccName}" Width="10*"/>
+                    <DataGridTextColumn Header="DescriptionOfAccessory" Binding="{Binding Path=DescriptionOfAccessory}" Width="10*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" Width="10*"/>
+                    <DataGridTextColumn Header="VAT" Binding="{Binding Path=VAT}" Width="10*"/>
+                    <DataGridTextColumn Header="Inventory" Binding="{Binding Path=Inventory}" Width="10*"/>
+                    <DataGridTextColumn Header="OrderBatch" Binding="{Binding Path=OrderBatch}" Width="10*"/>
+                    <DataGridTextColumn Header="Partner_ID" Binding="{Binding Path=Partner.Name}" Width="10*"/>
+
+                    <!--столбец с кнопками управления-->
+                    <DataGridTemplateColumn Header="Управление">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Изм." Width="30" Margin="5,0,0,0"
+                                            FontSize="8" Click="AccessoryEdit_Click"/>
+                                    <Button Content="Удал." Width="30" Margin="5,0,5,0"
+                                            FontSize="8" Click="AccessoryDelete_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!-- new-->
+            
+
+
+
+        </DockPanel>
+        <GridSplitter Grid.Column="1" Grid.Row="2" Width="3" HorizontalAlignment="Stretch" />
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Background="Beige">
+            <Label x:Name="AccessoryLabel" Content="Добавить Accessory" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
+
+
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="AccName" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextAccName" Width="150" Height="30" Margin="5,0,0,0"/> <!-- убрать биндинг YES -->
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="DescriptionOfAccessory" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextDescriptionOfAccessory"  Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Price" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextPrice"  Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="VAT" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextVAT"  Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Inventory" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextInventory" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="OrderLevel" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextOrderLevel"  Width="150" Height="30" Margin="5,0,0,0" TextChanged="AccessoryTextOrderLevel_TextChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="OrderBatch" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="AccessoryTextOrderBatch"  Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Partner_ID" Margin="5,0,0,0" Width="100"/>
+                <ComboBox x:Name="AccessoryTextPartner_ID"  Width="150" Height="30" Margin="5,0,0,0" DisplayMemberPath="Name" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button x:Name="AccessoryAddCommit" Content="Добавить книгу" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryAddCommit_Click"/>
+                <Button x:Name="AccessoryAddRollback" Content="Отменить" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="AccessoryAddRollback_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+</Page>

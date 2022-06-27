@@ -1,0 +1,87 @@
+﻿<Page x:Class="WpfApp2.Pages.Sales_PersonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp2.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Sales_PersonPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition x:Name="Sales_PersonColumnChange" Width="400" MaxWidth="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Sales_Person" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="26" FontWeight="ExtraBold"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Button x:Name="Sales_PersonAdd" Content="Добавить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5"/>
+            <Button x:Name="Sales_PersonCopy" Content="Копировать" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5"/>
+            <Button x:Name="Sales_PersonEdit" Content="Изменить"  Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5"/>
+            <Button x:Name="Sales_PersonDellete" Content="Удалить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" />
+            <Label Content="|" FontSize="24" FontWeight="Bold" Foreground="Gray" Margin="15,0,0,0"/>
+            <ComboBox x:Name="Sales_PersonFilterComboBox" Width="150" Height="30" Margin="15,0,0,0"/>
+            <TextBox x:Name="Sales_PersonTextBox" Margin="5,0,5,0" Width="170" Height="30"/>
+        </StackPanel>
+
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+        <DataGrid x:Name="Sales_PersonGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+
+            <DataGrid.Columns>
+                <!--1-ый способ-->
+                <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="10*"/>
+                <DataGridTextColumn Header="FamilyName" Binding="{Binding Path=FamilyName}" Width="10*"/>
+
+                <!--столбец с кнопками управления-->
+                <DataGridTemplateColumn Header="Управление">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Изм." Width="30" Margin="5,0,0,0"
+                                            FontSize="8"/>
+                                <Button Content="Удал." Width="30" Margin="5,0,5,0"
+                                            FontSize="8"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        </DockPanel>
+
+
+        <GridSplitter Grid.Column="1" Grid.Row="2" Width="3" HorizontalAlignment="Stretch" />
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical">
+            <Label x:Name="Sales_PersonLabel" Content="Добавить Sales_Person" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="FirstName" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="Sales_PersonTextFirstName" Text="{Binding ElementName=Sales_PersonGrid, Path=SelectedItem.FirstName}" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="FamilyName" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="Sales_PersonTextFamilyName" Text="{Binding ElementName=Sales_PersonGrid, Path=SelectedItem.FamilyName}" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button x:Name="Sales_PersonAddCommit" Content="Добавить Sales_Person" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5"/>
+                <Button x:Name="Sales_PersonAddRollback" Content="Отменить" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

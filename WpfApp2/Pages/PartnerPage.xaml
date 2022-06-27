@@ -1,0 +1,94 @@
+﻿<Page x:Class="WpfApp2.Pages.PartnerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp2.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PartnerPage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition x:Name="PartnerColumnChange" Width="400" MaxWidth="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Partner" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="26" FontWeight="ExtraBold"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Button x:Name="PartnerAdd" Content="Добавить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerAdd_Click"/>
+            <Button x:Name="PartnerCopy" Content="Копировать" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerCopy_Click"/>
+            <Button x:Name="PartnerEdit" Content="Изменить"  Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerEdit_Click"/>
+            <Button x:Name="PartnerDellete" Content="Удалить" Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerDellete_Click"/>
+            <Label Content="|" FontSize="24" FontWeight="Bold" Foreground="Gray" Margin="15,0,0,0"/>
+            <ComboBox x:Name="PartnerFilterComboBox" Width="150" Height="30" Margin="15,0,0,0"/>
+            <TextBox x:Name="PartnerTextBox" Margin="5,0,5,0" Width="170" Height="30"/>
+        </StackPanel>
+
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid x:Name="PartnerGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+
+            <DataGrid.Columns>
+                <!--1-ый способ-->
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="10*"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Path=Address}" Width="10*"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=City}" Width="10*"/>
+
+                <!--столбец с кнопками управления-->
+                <DataGridTemplateColumn Header="Управление">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Изм." Width="30" Margin="5,0,0,0"
+                                            FontSize="8" Click="PartnerEdit_Click"/>
+                                <Button Content="Удал." Width="30" Margin="5,0,5,0"
+                                            FontSize="8" Click="PartnerDellete_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        </DockPanel>
+
+
+        <GridSplitter Grid.Column="1" Grid.Row="2" Width="3" HorizontalAlignment="Stretch" />
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical">
+            <Label x:Name="PartnerLabel" Content="Добавить Partner" FontSize="16" FontWeight="Bold" Margin="5,0,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Name" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="PartnerTextName" Text="{Binding ElementName=PartnerGrid, Path=SelectedItem.Name}" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Address" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="PartnerTextAddress" Text="{Binding ElementName=PartnerGrid, Path=SelectedItem.Address}" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="City" Margin="5,0,0,0" Width="100"/>
+                <TextBox x:Name="PartnerTextCity" Text="{Binding ElementName=PartnerGrid, Path=SelectedItem.City}" Width="150" Height="30" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button x:Name="PartnerAddCommit" Content="Добавить Partner" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerAddCommit_Click"/>
+                <Button x:Name="PartnerAddRollback" Content="Отменить" 
+                    Height="30" Width="100" Padding="5,5,5,5" Margin="5,5,0,5" Click="PartnerAddRollback_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Page>
